@@ -86,6 +86,16 @@ test('works when it receives an SVG Element', function(assert) {
   click(document.querySelector('#the-path'));
 });
 
+test('works with a data test selector', function(assert) {
+  assert.expect(1);
+  this.onClick = () => {
+    assert.ok(true, 'a click event is fired');
+  };
+
+  this.render(hbs`<div data-test-selector {{action onClick}}></div>`);
+  click('[data-test-selector]');
+});
+
 test('in can receive an object of options as second argument, that is reused for all the mouse events fired in sequence', function(assert) {
   assert.expect(18);
   let index = 0;

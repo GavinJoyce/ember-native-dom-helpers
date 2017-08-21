@@ -66,3 +66,12 @@ test('find can use window and document', function(assert) {
   assert.ok(find(window) instanceof Window, 'window is returned for window');
   assert.ok(find(document) instanceof Document, 'document is returned for document');
 });
+
+test('find can use data test selector', function(assert) {
+  let selector = '[data-test-selector]';
+  this.render(hbs`<div data-test-selector />`);
+  let expected = document.querySelector(`#ember-testing ${selector}`);
+  let actual = find(selector);
+
+  assert.strictEqual(actual, expected, 'element with data test selector found within #ember-testing');
+});
